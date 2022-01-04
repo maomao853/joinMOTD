@@ -8,13 +8,13 @@ PLUGIN_METADATA = {
 	'link': 'https://github.com/TISUnion/joinMOTD',
 	'dependencies': {
 		'mcdreforged': '>=1.0.0',
-		'daycount': '>=1.0.0'
+		'daycount': '*'
 	}
 }
 
 Prefix = '!!joinMOTD'
-server_name = 'IFT 国际科技联盟'
-main_server_name = 'IFT'
+server_name = 'IFT-survival'
+main_server_name = 'IFT 国际科技联盟'
 server_list = [
 	'survival'
 ]

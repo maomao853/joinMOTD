@@ -5,12 +5,19 @@ PLUGIN_METADATA = {
 	'version': '1.1.0',
 	'name': 'Join MOTD Display',
 	'author': 'Fallen_Breath',
-	'link': 'https://github.com/TISUnion/joinMOTD'
+	'link': 'https://github.com/TISUnion/joinMOTD',
+	'dependencies': {
+		'mcdreforged': '>=1.0.0',
+		'daycount': '>=1.0.0'
+	}
 }
 
 Prefix = '!!joinMOTD'
-server_name = 'IFT-Survival'
-main_server_name = 'IFT国际科技联盟'
+server_name = 'IFT 国际科技联盟'
+main_server_name = 'IFT'
+server_list = [
+	'survival'
+]
 
 
 def get_day(server: ServerInterface):
@@ -26,8 +33,15 @@ def get_day(server: ServerInterface):
 
 
 def on_player_joined(server: ServerInterface, player, info):
+	messages = []
+	for subServerName in server_list:
+		command = '/server {}'.format(subServerName)
+		messages.append(RText('[{}]'.format(subServerName)).h(command).c(RAction.run_command, command))
+
 	server.tell(player, '§7=======§r Welcome back to §e{}§7 =======§r'.format(server_name))
 	server.tell(player, '今天是§e{}§r开服的第§e{}§r天'.format(main_server_name, get_day(server)))
+	server.tell(player, '§7-------§r Server List §7-------§r')
+	server.tell(player, RTextBase.join(' ', messages))
 
 
 def on_user_info(server, info):
